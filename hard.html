@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta property="og:title" content="Lexihunt Word Game">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="http://lexihunt.com/lexpreview.jpg">
+    <meta property="og:description" content="A game of words and numbers">
+    <meta property="og:url" content="https://lexihunt.com">
+    <meta property="og:image:secure_url" content="https://lexihunt.com/lexpreview.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="300" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Lexihunt</title>
+    <meta http-equiv="Cache-Control" content="max-age=0, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+</head>
+
+<body id="body">
+    <div id="clickHandler">
+        <header>
+            <h1>Lexihunt</h1>
+            <img alt="settings" id="settings-icon" src="settings.png">
+            <div id="settingsContainer">
+                <h4 id="settingsTitle"><b><u>Settings</u></b></h4>
+                <p id="darkModeLabel">Enable dark mode:
+                    <input type="checkbox" id="darkModeSwitch" class="checkbox">
+                    <label for="darkModeSwitch" class="toggle">
+                    </label>
+                </p>
+                <p id="onscreenKeyboardLabel">Enable onscreen keyboard:
+                    <input type="checkbox" id="onscreenKeyboardSwitch" class="checkbox">
+                    <label for="onscreenKeyboardSwitch" class="toggle" id="on-toggle">
+                    </label>
+                </p>
+            </div>
+            <img id="helpIcon" alt="help" src="help.png">
+            <div id="helpOptions">
+                <button class="helpLinks" id="aboutLink">About</button>
+                <button class="helpLinks" id="rulesLink">Rules</button>
+                <button class="helpLinks" id="tipsLink">Tips</button>
+                <button class="helpLinks" id="versionsLink">Versions</button>
+            </div>
+            <section class="helpTip" id="about">
+                <h4 class="helpTitle"><b><u>About</u></b></h4>
+                <ul>
+                    <li class="help">Imagine you've played a word in Scrabble, but you don't
+                        know how much each letter is worth.</li>
+                    <li class="help">In Lexihunt, each letter is secretly worth 1 to 7 points,
+                        and you know how many letters are worth each amount of points.</li>
+                    <li class="help">Your goal is to type a word worth exactly <span id="numberPlace"></span>
+                        points.
+                    </li>
+                    <br>
+                    <li id="attribution">Game design: Chris Backe, scripting/web design: Laura Kingdon</li>
+                </ul>
+            </section>
+            <section class="helpTip" id="rules">
+                <h4 class="helpTitle"><b><u>Rules</u></b></h4>
+                <ul>
+                    <li class="help">Type a common 3-8 letter word into the box labeled 'Guess', then hit 'Enter'.</li>
+                    <li class="help">You'll see the total points that word is worth and a hint
+                        about the value of one letter.</li>
+                    <li class="help">You have a maximum of 10 guesses. Each guess is color-coded according to
+                        how close you are: red is way off, orange is closer, and yellow is
+                        very close. </li>
+                    <li class="help">When you find a word worth <span id="numberPlaceTwo"></span> points, you win!
+                        Click the 'Share' button to brag about it on social media.</li>
+                </ul>
+            </section>
+            <section class="helpTip" id="tips">
+                <h4 class="helpTitle"><b><u>Tips</u></b></h4>
+                <ul>
+                    <li class="help">Feel free to use paper and pen to take notes, or use the notepad on the page.</li>
+                    <li class="help">It may help to look back at previous guesses to infer what a letter is worth.</li>
+                    <li class="help">If you're playing on a phone, we recommend turning your phone sideways to use
+                        the on-screen keyboard, or disabling it and using your phone keyboard.</li>
+                    <li class="help">Our word list contains the vast majority of common English words.</li>
+                    <li class="help">This is the alpha version and still contains some bugs. We apologize
+                        for the inconvenience. Please do let us know on social media if you encounter
+                        any serious issues.</li>
+                </ul>
+            </section>
+            <section class="helpTip" id="versions">
+                <h4 class="helpTitle"><b><u>Versions</u></b></h4>
+                <ul>
+                    <li class="help">Daily Lexihunt is the same for everyone, and you can play it only once a day.
+                        Feel free to share it on social media to show off!
+                    </li>
+                    <li class="help">Free Lexihunt is like Daily Lexihunt, but you can play it as much as you like!
+                        You can't share your results, though...
+                    </li>
+                    <li class="help">Easy Lexihunt is like Free Lexihunt, but you can see the letter values.</li>
+                    <li class="help">And Hard Lexihunt has higher numbers, so you need to make longer words to win.</li>
+                    <li class="help">Note that the puzzles for all of these games are different! Sadly, you can't
+                        reuse your winning word from Easy to beat the Daily puzzle in one go...</li>
+                </ul>
+            </section>
+            <img id="versionIcon" src="plus.png">
+            <div id="versionOptions">
+                <button class="versionLinks" id="dailyButton">Daily
+                    Lexihunt</button>
+                <button class="versionLinks" id="freeButton">Free
+                    Lexihunt</button>
+                <button class="versionLinks" id="easyButton">Easy
+                    Lexihunt</button>
+                <button class="versionLinks" id="hardButton">Hard
+                    Lexihunt</button>
+            </div>
+        </header>
+        <main>
+            <section id="goalContainer">
+            </section>
+            <section id="stringsList">
+            </section>
+            <br>
+            <section id="guessReminder">
+                <label for="guess" id="guessNumber">
+                    <b>Guess 1:</b>
+                </label>
+                <input type="text" id="guess" enterkeyhint="enter" autofocus autocomplete="off">
+            </section>
+            <section id="enterSpace"><button class="usefulButton" id="primeButton">Enter</button></section>
+            <section id="userMessages">
+                <br>
+                <p class="userMessage" id="guessWrongLength" class="error">Your guess must be between 3-8 letters.</p>
+                <p class="userMessage" id="guessNotLetters" class="error">Your guess must include only letters.</p>
+                <p class="userMessage" id="guessNotWord" class="error">Your guess must be a word in the dictionary.</p>
+                <p class="userMessage" id="threeGuesses">3 guesses left...</p>
+                <p class="userMessage" id="twoGuesses">2 guesses left...</p>
+                <p class="userMessage" id="oneGuess">1 guess left...</p>
+                <br>
+            </section>
+            <section id="buttonWrapper">
+                <div>
+                    <button class="letterButton" id="Q">Q</button>
+                    <button class="letterButton" id="W">W</button>
+                    <button class="letterButton" id="E">E</button>
+                    <button class="letterButton" id="R">R</button>
+                    <button class="letterButton" id="T">T</button>
+                    <button class="letterButton" id="Y">Y</button>
+                    <button class="letterButton" id="U">U</button>
+                    <button class="letterButton" id="I">I</button>
+                    <button class="letterButton" id="O">O</button>
+                    <button class="letterButton" id="P">P</button>
+                </div>
+                <div>
+                    <button class="letterButton" id="A">A</button>
+                    <button class="letterButton" id="S">S</button>
+                    <button class="letterButton" id="D">D</button>
+                    <button class="letterButton" id="F">F</button>
+                    <button class="letterButton" id="G">G</button>
+                    <button class="letterButton" id="H">H</button>
+                    <button class="letterButton" id="J">J</button>
+                    <button class="letterButton" id="K">K</button>
+                    <button class="letterButton" id="L">L</button>
+                </div>
+                <div>
+                    <button class="usefulButton" id="deleteButton">Delete</button>
+                    <button class="letterButton" id="Z">Z</button>
+                    <button class="letterButton" id="X">X</button>
+                    <button class="letterButton" id="C">C</button>
+                    <button class="letterButton" id="V">V</button>
+                    <button class="letterButton" id="B">B</button>
+                    <button class="letterButton" id="N">N</button>
+                    <button class="letterButton" id="M">M</button>
+                    <button class="usefulButton" id="submitButton">Enter</button>
+                </div>
+            </section>
+            <section id="previousGuessContainer">
+            </section>
+            <section id="notepad">
+                <label for="notesBox" id="notesLabel">Use the space below for notes:</label>
+                <textarea rows="10" cols="100" name="notepad" id="notesBox" autocomplete="off"></textarea>
+            </section>
+
+            <div id="modalContainer">
+                <div id="successModal" class="modal">
+                    <button class="closeButton">×</button>
+                    <h2 class="modalBanner">You win!</h2>
+                    <br>
+                    <div class="modalContent">
+                        <img src="happyface.png" id="happyface" alt="">
+                        <br>
+                        <container id="successMessageArea"></container>
+                        <button class="playButton" id="winPlayButton">Play Again</button>
+                    </div>
+                </div>
+                <div id="failModal" class="modal">
+                    <button class="closeButton">×</button>
+                    <h2 class="modalBanner">Out of guesses...</h2>
+                    <br>
+                    <div class="modalContent" id="failModalContent">
+                        <img src="sadface.png" id="sadface" alt="">
+                        <br>
+                        <container id="failMessageArea"></container>
+                    </div>
+                    <button class="playButton" id="losePlayButton">Play Again</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+<footer>
+    <script type="module" src="cleanwordfile.js"></script>
+    <script type="module" src="wordfile.js"></script>
+    <script type="module" src="hard.js"></script>
+</footer>
+
+</html>
